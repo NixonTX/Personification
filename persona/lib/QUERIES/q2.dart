@@ -1,0 +1,114 @@
+import 'package:flutter/material.dart';
+
+class Q2 extends StatefulWidget {
+  const Q2({super.key});
+
+  @override
+  State<Q2> createState() => _Q2State();
+}
+
+class _Q2State extends State<Q2> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Queries",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Navigator.pop(context);
+          },
+        ),
+      ),
+      backgroundColor: Colors.pinkAccent,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 0.0),
+        child: Column(
+          children: [
+            // Progress bar - how many left and a Badge at the end
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Container(
+                width: double.infinity,
+                color: const Color.fromARGB(255, 160, 215, 240),
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "Progress Bar",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
+            const SizedBox(height: 5),
+            // Question Container
+            Padding(
+              padding: const EdgeInsets.only(top: 5, bottom: 5),
+              child: Container(
+                width: double.infinity,
+                color: const Color.fromARGB(255, 160, 215, 240),
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "Question 1",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 32.0), // Left and right padding
+              child: Column(
+                children: [
+                  optionContainer("Option 1"),
+                  const SizedBox(height: 5),
+                  optionContainer("Option 2"),
+                  const SizedBox(height: 5),
+                  optionContainer("Option 3"),
+                  const SizedBox(height: 5),
+                  optionContainer("Option 4"),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // option container
+  Widget optionContainer(String optionText) {
+    return Container(
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.blueAccent,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      width: double.infinity,
+      child: Text(
+        optionText,
+        style: TextStyle(
+          fontSize: 22,
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
