@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona1.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona2.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona3.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona4.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona5.dart';
 import 'package:persona/MODELS/persona1.dart';
 import 'package:persona/MODELS/persona2.dart';
 import 'package:persona/MODELS/persona3.dart';
@@ -26,8 +31,9 @@ class MyApp extends StatelessWidget {
       ),
       // home: Q2()
       // home: LiedOrNot(),
-      // home: Persona(),
-      home: Persona5(),
+      // home: Persona1(),
+      home: DerivedPersona5(),
+      // home: Persona5(),
     );
   }
 }
