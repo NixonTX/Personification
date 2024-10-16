@@ -4,10 +4,10 @@ class Q2 extends StatefulWidget {
   const Q2({super.key});
 
   @override
-  State<Q2> createState() => _Q2State();
+  State<Q2> createState() => _Q1State();
 }
 
-class _Q2State extends State<Q2> {
+class _Q1State extends State<Q2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,21 +31,32 @@ class _Q2State extends State<Q2> {
         padding: const EdgeInsets.symmetric(vertical: 0.0),
         child: Column(
           children: [
-            // Progress bar - how many left and a Badge at the end
+            // Progress bar with badge icon
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
               child: Container(
                 width: double.infinity,
                 color: const Color.fromARGB(255, 160, 215, 240),
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  "Progress Bar",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.left,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Progress Bar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        fontSize: 25,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    // Badge icon
+                    Icon(
+                      Icons.star,
+                      color: Colors.grey,
+                      size: 30,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -58,7 +69,7 @@ class _Q2State extends State<Q2> {
                 color: const Color.fromARGB(255, 160, 215, 240),
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "Question 1",
+                  "When faced with a challenge, what is your initial reaction?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -75,13 +86,17 @@ class _Q2State extends State<Q2> {
                   horizontal: 32.0), // Left and right padding
               child: Column(
                 children: [
-                  optionContainer("Option 1"),
+                  optionContainer(
+                      "Develop a detailed plan to tackle it"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 2"),
+                  optionContainer(
+                      "Jump in and figure it out as you go"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 3"),
+                  optionContainer(
+                      "Ask for support or collaborate with others"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 4"),
+                  optionContainer(
+                      "Find a logical or creative solution"),
                 ],
               ),
             ),
@@ -91,7 +106,7 @@ class _Q2State extends State<Q2> {
     );
   }
 
-  // option container
+  // Method to create option containers
   Widget optionContainer(String optionText) {
     return Container(
       padding: const EdgeInsets.all(12.0),
