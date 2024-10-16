@@ -52,7 +52,7 @@ class LiedOrNot extends StatelessWidget {
                   horizontal: 32.0), // Left and right padding
               child: Column(
                 children: [
-                  optionContainer("Yes, I did lie"),
+                  optionContainer("Yes, I lied"),
                   const SizedBox(height: 5),
                   optionContainer("No, I didn't lie"),
                 ],
