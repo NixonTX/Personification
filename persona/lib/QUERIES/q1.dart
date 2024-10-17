@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Q2.dart';
 
 class Q1 extends StatefulWidget {
   const Q1({super.key});
@@ -22,7 +23,7 @@ class _Q1State extends State<Q1> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
       ),
@@ -106,23 +107,30 @@ class _Q1State extends State<Q1> {
     );
   }
 
-  // Method to create option containers
   Widget optionContainer(String optionText) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      width: double.infinity,
-      child: Text(
-        optionText,
-        style: TextStyle(
-          fontSize: 22,
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Q2()),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        textAlign: TextAlign.center,
+        width: double.infinity,
+        child: Text(
+          optionText,
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

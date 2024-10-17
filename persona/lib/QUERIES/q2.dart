@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:persona/QUERIES/q26.dart';
+import 'package:persona/QUERIES/q3.dart';
+import 'Q3.dart'; // Make sure Q3.dart exists and is properly defined
 
 class Q2 extends StatefulWidget {
   const Q2({super.key});
 
   @override
-  State<Q2> createState() => _Q1State();
+  State<Q2> createState() => _Q2State();
 }
 
-class _Q1State extends State<Q2> {
+class _Q2State extends State<Q2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,23 +83,17 @@ class _Q1State extends State<Q2> {
               ),
             ),
             const SizedBox(height: 30),
-
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 32.0), // Left and right padding
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 children: [
-                  optionContainer(
-                      "Develop a detailed plan to tackle it"),
+                  optionContainer("Develop a detailed plan to tackle it"),
                   const SizedBox(height: 5),
-                  optionContainer(
-                      "Jump in and figure it out as you go"),
+                  optionContainer("Jump in and figure it out as you go"),
                   const SizedBox(height: 5),
-                  optionContainer(
-                      "Ask for support or collaborate with others"),
+                  optionContainer("Ask for support or collaborate with others"),
                   const SizedBox(height: 5),
-                  optionContainer(
-                      "Find a logical or creative solution"),
+                  optionContainer("Find a logical or creative solution"),
                 ],
               ),
             ),
@@ -108,21 +105,30 @@ class _Q1State extends State<Q2> {
 
   // Method to create option containers
   Widget optionContainer(String optionText) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      width: double.infinity,
-      child: Text(
-        optionText,
-        style: TextStyle(
-          fontSize: 22,
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () {
+        // Navigate to Q3 page when an option is pressed
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Q26()),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        textAlign: TextAlign.center,
+        width: double.infinity,
+        child: Text(
+          optionText,
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
