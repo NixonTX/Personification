@@ -13,6 +13,8 @@ import 'package:persona/QUERIES/lied_or_not.dart';
 import 'package:persona/QUERIES/q1.dart';
 import 'package:persona/QUERIES/q2.dart';
 import 'package:persona/QUERIES/q26.dart';
+import 'package:persona/USER/login_page.dart';
+import 'package:persona/USER/signup_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,16 +27,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: Q1()
-        // home: LiedOrNot(),
-        // home: Persona1(),
-        // home: DerivedPersona5(),
-        // home: Persona5(),
-        );
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      // home: Q1()
+      // home: SignupPage(),
+      home: LoginPage(),
+      // home: LiedOrNot(),
+      // home: Persona1(),
+      // home: DerivedPersona5(),
+      // home: Persona5(),
+    );
   }
 }
