@@ -4,6 +4,7 @@ import 'package:persona/DERIVED_MODELS/derived_persona2.dart';
 import 'package:persona/DERIVED_MODELS/derived_persona3.dart';
 import 'package:persona/DERIVED_MODELS/derived_persona4.dart';
 import 'package:persona/DERIVED_MODELS/derived_persona5.dart';
+import 'package:persona/HOME/home_page.dart';
 import 'package:persona/MODELS/persona1.dart';
 import 'package:persona/MODELS/persona2.dart';
 import 'package:persona/MODELS/persona3.dart';
@@ -34,7 +35,16 @@ class MyApp extends StatelessWidget {
       ),
       // home: Q1()
       // home: SignupPage(),
-      home: LoginPage(),
+      // home: HomePage(),
+
+      initialRoute: '/signup',
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+        '/homepage': (context) => HomePage(),
+      },
+
+      // home: LoginPage(),
       // home: LiedOrNot(),
       // home: Persona1(),
       // home: DerivedPersona5(),

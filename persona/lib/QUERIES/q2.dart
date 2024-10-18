@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persona/QUERIES/q26.dart';
 import 'package:persona/QUERIES/q3.dart';
-import 'Q3.dart'; // Make sure Q3.dart exists and is properly defined
+
 
 class Q2 extends StatefulWidget {
   const Q2({super.key});

@@ -1,25 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:persona/API/api_service.dart';
 
-class SignupPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _fullNameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final ApiService _apiService = ApiService();
+
+  String _statusMessage = ''; // To store the status message
+
+  // Sign-up function that calls the ApiService method
+  Future<void> _signUp() async {
+    if (_formKey.currentState!.validate()) {
+      final fullName = _fullNameController.text;
+      final username = _usernameController.text;
+      final email = _emailController.text;
+      final password = _passwordController.text;
+      final phoneNumber = _phoneController.text;
+
+      // Show initial message
+      setState(() {
+        _statusMessage = 'Signing up...';
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(_statusMessage)),
+      );
+
+      // Call the signUp method from ApiService and wait for the result
+      try {
+        await _apiService.signUp(
+            fullName, username, email, password, phoneNumber);
+        setState(() {
+          _statusMessage = 'Sign Up Successful';
+        });
+
+        // Navigate to the homepage if the sign-up is successful
+        Navigator.pushReplacementNamed(context, '/homepage');
+        
+      } catch (e) {
+        setState(() {
+          _statusMessage = 'Sign Up Failed: $e';
+        });
+      }
+
+      // Display the message after submission
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(_statusMessage)),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Signup',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        title: Text(
+          'Signup',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.blue, // Blue color for AppBar
+        backgroundColor: Colors.blue,
       ),
-      backgroundColor: Colors.white, // White background for the entire page
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -32,9 +84,10 @@ class SignupPage extends StatelessWidget {
                 Text(
                   'Create Account',
                   style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueGrey[900]), // Dark grey color for text
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey[900],
+                  ),
                 ),
                 SizedBox(height: 20),
                 _buildTextField(
@@ -43,9 +96,9 @@ class SignupPage extends StatelessWidget {
                   keyboardType: TextInputType.name,
                 ),
                 _buildTextField(
-                  controller: _phoneNumberController,
-                  label: 'Phone Number',
-                  keyboardType: TextInputType.phone,
+                  controller: _usernameController,
+                  label: 'Username',
+                  keyboardType: TextInputType.text,
                 ),
                 _buildTextField(
                   controller: _emailController,
@@ -53,9 +106,9 @@ class SignupPage extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                 ),
                 _buildTextField(
-                  controller: _usernameController,
-                  label: 'Username',
-                  keyboardType: TextInputType.text,
+                  controller: _phoneController,
+                  label: 'Phone Number',
+                  keyboardType: TextInputType.phone,
                 ),
                 _buildTextField(
                   controller: _passwordController,
@@ -69,29 +122,21 @@ class SignupPage extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Center(
-                  // Centering the button
                   child: Container(
-                    width: double.infinity, // Making button full width
+                    width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue, // Blue color for button
+                        backgroundColor: Colors.blue,
                         padding: EdgeInsets.symmetric(vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Handle signup logic here
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Signing up...')),
-                          );
-                        }
-                      },
-                      child: Text('Sign Up',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white)), // White text for button
+                      onPressed: _signUp,
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -103,27 +148,26 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(
-      {required TextEditingController controller,
-      required String label,
-      bool obscureText = false,
-      TextInputType keyboardType = TextInputType.text}) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle:
-              TextStyle(color: Colors.blueGrey), // Grey color for label text
+          labelStyle: TextStyle(color: Colors.blueGrey),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(color: Colors.blue), // Blue border color
+            borderSide: BorderSide(color: Colors.blue),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(
-                color: Colors.blueAccent), // Accent blue for focused border
+            borderSide: BorderSide(color: Colors.blueAccent),
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         ),

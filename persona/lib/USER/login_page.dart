@@ -76,9 +76,10 @@ class LoginPage extends StatelessWidget {
                     onPressed: () {
                       // Navigate to the signup page
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignupPage()),
-                      );
+  context,
+  MaterialPageRoute(builder: (context) => SignUpPage()),
+);
+
                     },
                     child: Text(
                       'Don\'t have an account? Sign Up',
