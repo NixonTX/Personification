@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Q2.dart';
 
 class Q1 extends StatefulWidget {
   const Q1({super.key});
@@ -22,7 +23,7 @@ class _Q1State extends State<Q1> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
       ),
@@ -45,7 +46,7 @@ class _Q1State extends State<Q1> {
                       "Progress Bar",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.grey,
                         fontSize: 25,
                       ),
                       textAlign: TextAlign.left,
@@ -53,7 +54,7 @@ class _Q1State extends State<Q1> {
                     // Badge icon
                     Icon(
                       Icons.star,
-                      color: Colors.white,
+                      color: Colors.grey,
                       size: 30,
                     ),
                   ],
@@ -69,7 +70,7 @@ class _Q1State extends State<Q1> {
                 color: const Color.fromARGB(255, 160, 215, 240),
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "Question 1",
+                  "How do you prefer to spend your weekend?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -86,13 +87,17 @@ class _Q1State extends State<Q1> {
                   horizontal: 32.0), // Left and right padding
               child: Column(
                 children: [
-                  optionContainer("Option 1"),
+                  optionContainer(
+                      "Setting goals and planning for the week ahead"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 2"),
+                  optionContainer(
+                      "Exploring new places or trying new activities"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 3"),
+                  optionContainer(
+                      "Spending time with family or helping others"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 4"),
+                  optionContainer(
+                      "Reading, analyzing, or working on a project"),
                 ],
               ),
             ),
@@ -102,23 +107,30 @@ class _Q1State extends State<Q1> {
     );
   }
 
-  // Method to create option containers
   Widget optionContainer(String optionText) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      width: double.infinity,
-      child: Text(
-        optionText,
-        style: TextStyle(
-          fontSize: 22,
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Q2()),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        textAlign: TextAlign.center,
+        width: double.infinity,
+        child: Text(
+          optionText,
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

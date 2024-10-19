@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:persona/QUERIES/q26.dart';
+import 'package:persona/QUERIES/q3.dart';
+
 
 class Q2 extends StatefulWidget {
   const Q2({super.key});
@@ -31,21 +34,32 @@ class _Q2State extends State<Q2> {
         padding: const EdgeInsets.symmetric(vertical: 0.0),
         child: Column(
           children: [
-            // Progress bar - how many left and a Badge at the end
+            // Progress bar with badge icon
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
               child: Container(
                 width: double.infinity,
                 color: const Color.fromARGB(255, 160, 215, 240),
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  "Progress Bar",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.left,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Progress Bar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        fontSize: 25,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    // Badge icon
+                    Icon(
+                      Icons.star,
+                      color: Colors.grey,
+                      size: 30,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -58,7 +72,7 @@ class _Q2State extends State<Q2> {
                 color: const Color.fromARGB(255, 160, 215, 240),
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "Question 1",
+                  "When faced with a challenge, what is your initial reaction?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -69,19 +83,17 @@ class _Q2State extends State<Q2> {
               ),
             ),
             const SizedBox(height: 30),
-
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 32.0), // Left and right padding
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 children: [
-                  optionContainer("Option 1"),
+                  optionContainer("Develop a detailed plan to tackle it"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 2"),
+                  optionContainer("Jump in and figure it out as you go"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 3"),
+                  optionContainer("Ask for support or collaborate with others"),
                   const SizedBox(height: 5),
-                  optionContainer("Option 4"),
+                  optionContainer("Find a logical or creative solution"),
                 ],
               ),
             ),
@@ -91,23 +103,32 @@ class _Q2State extends State<Q2> {
     );
   }
 
-  // option container
+  // Method to create option containers
   Widget optionContainer(String optionText) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      width: double.infinity,
-      child: Text(
-        optionText,
-        style: TextStyle(
-          fontSize: 22,
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () {
+        // Navigate to Q3 page when an option is pressed
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Q26()),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        textAlign: TextAlign.center,
+        width: double.infinity,
+        child: Text(
+          optionText,
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
