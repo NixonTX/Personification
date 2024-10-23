@@ -35,14 +35,15 @@ class MyApp extends StatelessWidget {
       ),
       // home: Q1()
       // home: SignupPage(),
-      // home: HomePage(),
+      home: HomePage(),
+      // home: NoModelPage(),
 
-      initialRoute: '/signup',
-      routes: {
-        '/login': (context) => LoginPage(),
-        '/signup': (context) => SignUpPage(),
-        '/homepage': (context) => HomePage(),
-      },
+      // initialRoute: '/signup',
+      // routes: {
+      //   '/login': (context) => LoginPage(),
+      //   '/signup': (context) => SignUpPage(),
+      //   '/homepage': (context) => HomePage(),
+      // },
 
       // home: LoginPage(),
       // home: LiedOrNot(),

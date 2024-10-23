@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:persona/QUERIES/q25.dart';
 import 'package:persona/QUERIES/q4.dart';
+import 'package:persona/QUERIES/q6.dart';  // Import Q3 for option navigation
 
-class Q3 extends StatefulWidget {
-  const Q3({super.key});
+class Q5 extends StatefulWidget {
+  const Q5({super.key});
 
   @override
-  State<Q3> createState() => _Q3State(); // Correct naming of the state
+  State<Q5> createState() => _Q5State();
 }
 
-class _Q3State extends State<Q3> {
+class _Q5State extends State<Q5> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,11 @@ class _Q3State extends State<Q3> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pop(context);
+            // Navigate back to Q4 page
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Q4()),  // Navigate back to Q1
+            );
           },
         ),
       ),
@@ -32,6 +38,7 @@ class _Q3State extends State<Q3> {
         padding: const EdgeInsets.symmetric(vertical: 0.0),
         child: Column(
           children: [
+            // Progress bar with badge icon
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
               child: Container(
@@ -50,6 +57,7 @@ class _Q3State extends State<Q3> {
                       ),
                       textAlign: TextAlign.left,
                     ),
+                    // Badge icon
                     Icon(
                       Icons.star,
                       color: Colors.grey,
@@ -60,6 +68,7 @@ class _Q3State extends State<Q3> {
               ),
             ),
             const SizedBox(height: 5),
+            // Question Container
             Padding(
               padding: const EdgeInsets.only(top: 5, bottom: 5),
               child: Container(
@@ -67,7 +76,7 @@ class _Q3State extends State<Q3> {
                 color: const Color.fromARGB(255, 160, 215, 240),
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "What environment makes you feel most productive?",
+                  "How do you react when things don’t go as planned?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -82,13 +91,13 @@ class _Q3State extends State<Q3> {
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 children: [
-                  optionContainer("A structured and organized workspace"),
+                  optionContainer("Adjust the plan and stay focused on the goal"),
                   const SizedBox(height: 5),
-                  optionContainer("A dynamic and ever-changing setting"),
+                  optionContainer("Embrace the situation and go with the flow"),
                   const SizedBox(height: 5),
-                  optionContainer("A collaborative and supportive environment"),
+                  optionContainer("Seek help or support from others"),
                   const SizedBox(height: 5),
-                  optionContainer("A quiet, focused space for concentration"),
+                  optionContainer("Analyze what went wrong and find a solution"),
                 ],
               ),
             ),
@@ -98,12 +107,14 @@ class _Q3State extends State<Q3> {
     );
   }
 
+  // Method to create option containers
   Widget optionContainer(String optionText) {
     return GestureDetector(
       onTap: () {
+        // Navigate to Q3 page when an option is pressed
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Q4()), // Change to Q4
+          MaterialPageRoute(builder: (context) => Q25()),  // Navigate to Q3
         );
       },
       child: Container(
