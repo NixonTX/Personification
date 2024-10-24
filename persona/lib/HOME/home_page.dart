@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:persona/API/api_service.dart';
+import 'package:persona/DRAWER/profile_page.dart';
 import 'package:persona/MODELS/no_model.dart';
 import 'package:persona/QUERIES/q1.dart';
 
@@ -8,6 +10,75 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
+              onTap: () {
+    Navigator.pop(context); // Close the drawer
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfilePage(), // Navigate to ProfilePage
+      ),
+    );
+  },
+
+
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About'),
+              onTap: () {
+                // Navigate to an about page
+                Navigator.pop(context); // Close the drawer
+                // Add navigation to your About page here if you have one
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Navigate to a settings page
+                Navigator.pop(context); // Close the drawer
+                // Add navigation to your Settings page here if you have one
+              },
+            ),
+            ListTile(
+  leading: Icon(Icons.logout),
+  title: Text('Logout'),
+  onTap: () async {
+    Navigator.pop(context); // Close the drawer
+
+    try {
+      await ApiService().logout(); // Call the logout method from your ApiService
+      // Navigate to the signup page after successful logout
+      Navigator.of(context).pushReplacementNamed('/signup'); // Make sure '/signup' is defined in your routes
+    } catch (e) {
+      // Handle any error during logout, e.g., show a message
+      print('Logout failed: $e');
+    }
+  },
+),
+
+          ],
+        ),
       ),
       body: Column(
         children: [

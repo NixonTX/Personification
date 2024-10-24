@@ -1,29 +1,49 @@
-# user/serializers.py
 from rest_framework import serializers
-from .models import CustomUser
+from user.models import CustomUser
 
 class UserSerializer(serializers.ModelSerializer):
-    confirm_password = serializers.CharField(write_only=True)
-
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'full_name', 'phone_number', 'password', 'confirm_password']
-        extra_kwargs = {
-            'password': {'write_only': True},
-        }
-
-    def validate(self, attrs):
-        if attrs['password'] != attrs['confirm_password']:
-            raise serializers.ValidationError({"password": "Passwords do not match."})
-        return attrs
+        fields = ['full_name', 'username', 'email', 'password', 'phone_number']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        validated_data.pop('confirm_password')
-        user = CustomUser.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password'],
-            full_name=validated_data.get('full_name', ''),
-            phone_number=validated_data.get('phone_number', '')
-        )
+        user = CustomUser(**validated_data)
+        user.set_password(validated_data['password'])  # Hash the password
+        user.save()
         return user
+
+# class LoginSerializer(serializers.Serializer):
+#     username = serializers.CharField(required=True)
+#     password = serializers.CharField(required=True)
+
+# serializers.py
+from django.contrib.auth import authenticate
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()  # Can be used for username or email
+    password = serializers.CharField()
+
+    def validate(self, attrs):
+        username = attrs.get('username')
+        password = attrs.get('password')
+
+        if username and password:
+            # Check if the input is an email
+            if '@' in username:
+                # If it's an email, get the user by email
+                user = CustomUser.objects.filter(email=username).first()
+                if user:
+                    username = user.username  # Use the username for authentication
+                else:
+                    raise serializers.ValidationError("Invalid credentials")
+
+            # Authenticate with the username and password
+            user = authenticate(username=username, password=password)
+            if user is None:
+                raise serializers.ValidationError("Invalid credentials")
+        else:
+            raise serializers.ValidationError("Must include username and password")
+
+        attrs['user'] = user  # Store the user object for further use
+        return attrs
