@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona1.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona2.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona3.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona4.dart';
+import 'package:persona/DERIVED_MODELS/derived_persona5.dart';
+import 'dart:math';
+
+import 'package:persona/QUERIES/q25.dart';
 
 class Q26 extends StatefulWidget {
   const Q26({super.key});
@@ -8,6 +16,8 @@ class Q26 extends StatefulWidget {
 }
 
 class _Q1State extends State<Q26> {
+  bool isProcessing = false;  // Flag to show or hide the CircularProgressIndicator
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,108 +32,179 @@ class _Q1State extends State<Q26> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            // Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Q25()),
+            );
           },
         ),
       ),
       backgroundColor: Colors.pinkAccent,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 0.0),
-        child: Column(
-          children: [
-            // Progress bar with badge icon
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: Container(
-                width: double.infinity,
-                color: const Color.fromARGB(255, 160, 215, 240),
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Progress Bar",
+      body: Stack(
+        children: [
+          // Main content
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    width: double.infinity,
+                    color: const Color.fromARGB(255, 160, 215, 240),
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Progress Bar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                            fontSize: 25,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.grey,
+                          size: 30,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: Container(
+                    width: double.infinity,
+                    color: const Color.fromARGB(255, 160, 215, 240),
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      "If you were to plan a trip, what would it look like?",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey,
+                        color: Colors.white,
                         fontSize: 25,
                       ),
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.justify,
                     ),
-                    // Badge icon
-                    Icon(
-                      Icons.star,
-                      color: Colors.grey,
-                      size: 30,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: Column(
+                    children: [
+                      optionContainer("Well-organized with specific goals"),
+                      const SizedBox(height: 5),
+                      optionContainer("Spontaneous and full of surprises"),
+                      const SizedBox(height: 5),
+                      optionContainer("Relaxing and focused on bonding"),
+                      const SizedBox(height: 5),
+                      optionContainer("An opportunity to learn about the culture"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Transparent overlay with CircularProgressIndicator
+          if (isProcessing)
+            Container(
+              color: Colors.black.withOpacity(0.5),  // Semi-transparent background
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        CircularProgressIndicator(),  // Circular progress
+                        Text(
+                          "Processing...",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 5),
-            // Question Container
-            Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 5),
-              child: Container(
-                width: double.infinity,
-                color: const Color.fromARGB(255, 160, 215, 240),
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  "If you were to plan a trip, what would it look like?",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 32.0), // Left and right padding
-              child: Column(
-                children: [
-                  optionContainer(
-                      "Well-organized with specific goals"),
-                  const SizedBox(height: 5),
-                  optionContainer(
-                      "Spontaneous and full of surprises"),
-                  const SizedBox(height: 5),
-                  optionContainer(
-                      "Relaxing and focused on bonding"),
-                  const SizedBox(height: 5),
-                  optionContainer(
-                      "An opportunity to learn about the culture"),
-                ],
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
 
   // Method to create option containers
   Widget optionContainer(String optionText) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      width: double.infinity,
-      child: Text(
-        optionText,
-        style: TextStyle(
-          fontSize: 22,
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isProcessing = true;  // Show the CircularProgressIndicator
+        });
+        Future.delayed(Duration(seconds: 3), () {
+          setState(() {
+            isProcessing = false;  // Hide the CircularProgressIndicator
+          });
+          navigateToRandomDerivedPersona();  // Navigate to random persona
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent,
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        textAlign: TextAlign.center,
+        width: double.infinity,
+        child: Text(
+          optionText,
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
+    );
+  }
+
+  // Method to navigate to a random DerivedPersona
+  void navigateToRandomDerivedPersona() {
+    Random random = Random();
+    int randomIndex = random.nextInt(5);  // Random number between 0 and 4
+
+    Widget nextPage;
+
+    switch (randomIndex) {
+      case 0:
+        nextPage = DerivedPersona1();  // The Achiever
+        break;
+      case 1:
+        nextPage = DerivedPersona2();  // The Explorer
+        break;
+      case 2:
+        nextPage = DerivedPersona3();  // The Caregiver
+        break;
+      case 3:
+        nextPage = DerivedPersona4();  // The Analyst
+        break;
+      case 4:
+        nextPage = DerivedPersona5();  // The Entertainer
+        break;
+      default:
+        nextPage = DerivedPersona1();  // Fallback in case of an error
+    }
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => nextPage),
     );
   }
 }

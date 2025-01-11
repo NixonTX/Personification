@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:persona/QUERIES/q26.dart';
-import 'package:persona/QUERIES/q3.dart';
-
+import 'package:persona/QUERIES/q1.dart';  // Import Q1 for back navigation
+import 'package:persona/QUERIES/q3.dart';  // Import Q3 for option navigation
 
 class Q2 extends StatefulWidget {
   const Q2({super.key});
@@ -25,7 +24,11 @@ class _Q2State extends State<Q2> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            // Navigator.pop(context);
+            // Navigate back to Q1 page
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Q1()),  // Navigate back to Q1
+            );
           },
         ),
       ),
@@ -110,7 +113,7 @@ class _Q2State extends State<Q2> {
         // Navigate to Q3 page when an option is pressed
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Q26()),
+          MaterialPageRoute(builder: (context) => Q3()),  // Navigate to Q3
         );
       },
       child: Container(

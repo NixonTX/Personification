@@ -46,7 +46,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
         // Navigate to the homepage if the sign-up is successful
         Navigator.pushReplacementNamed(context, '/homepage');
-        
       } catch (e) {
         setState(() {
           _statusMessage = 'Sign Up Failed: $e';
@@ -136,6 +135,22 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Text(
                         'Sign Up',
                         style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20), // Add some space before the login prompt
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, '/login'); // Navigate to login page
+                    },
+                    child: Text(
+                      'Already have an account? Login here',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 16,
                       ),
                     ),
                   ),
